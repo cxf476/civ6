@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="b5776b4b-93b1-409c-acee-09f829855eed">
+	<Properties>
+		<Name>Civil 6 Cheat</Name>
+		<Description>Allow Cheating in Civil 6</Teaser>
+		<Authors>cxf476</Authors>
+		<AffectsSavedGames>1</AffectsSavedGames>
+	</Properties>
+	<InGameActions>
+		<UpdateDatabase id="CHEAT_Data">
+			<File>Civil6Cheat.sql</File>
+		</UpdateDatabase>
+	</InGameActions>
+	<Files>
+		<File>Civil6Cheat.sql</File>
+	</Files>
+</Mod>

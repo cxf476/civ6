@@ -5,7 +5,7 @@ INSERT INTO Types ('Type', 'Kind') VALUES ('BUILDING_HUMAN_PLAYER', 'KIND_BUILDI
 INSERT INTO Traits ('TraitType', 'Name', 'Description') VALUES ('TRAIT_HUMAN_PLAYER', 'AAA Trait', 'AAA Cheat trait for human player');
 INSERT INTO CivilizationTraits ('CivilizationType', 'TraitType') VALUES ('CIVILIZATION_CHINA', 'TRAIT_HUMAN_PLAYER');
 
-INSERT INTO Buildings ('BuildingType', 'TraitType', 'Name', 'Description', 'PurchaseYield', 'Cost', 'AdvisorType', PrereqTech, PrereqDistrict, Housing) VALUES ('BUILDING_HUMAN_PLAYER', 'TRAIT_HUMAN_PLAYER', 'AAA Building', 'AAA  Cheating Building for Human Player', 'YIELD_GOLD', '1', 'ADVISOR_CULTURE', NULL, 'DISTRICT_CITY_CENTER', '10');
+INSERT INTO Buildings ('BuildingType', 'TraitType', 'Name', 'Description', 'PurchaseYield', 'Cost', 'AdvisorType', PrereqTech, PrereqDistrict, Housing, Entertainment) VALUES ('BUILDING_HUMAN_PLAYER', 'TRAIT_HUMAN_PLAYER', 'AAA Building', 'AAA  Cheating Building for Human Player', 'YIELD_GOLD', '1', 'ADVISOR_CULTURE', NULL, 'DISTRICT_CITY_CENTER', '10', '10');
 
 
 UPDATE Units SET BaseMoves='3', Range='4' WHERE UnitType='UNIT_ROCKET_ARTILLERY';
@@ -31,3 +31,8 @@ INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_MISSIL
 UPDATE Buildings SET ObsoleteEra='NO_ERA', TraitType='TRAIT_HUMAN_PLAYER' WHERE IsWonder='1';
 
 INSERT INTO Building_YieldChanges('BuildingType', 'YieldType', 'YieldChange') VALUES ('BUILDING_HUMAN_PLAYER', 'YIELD_PRODUCTION', '20');
+
+UPDATE RequirementSetRequirements SET RequirementId='REQUIRES_PLAYER' WHERE RequirementSetId='CITY_HAS_CHICHEN_ITZA_REQUIREMENTS';
+UPDATE RequirementSetRequirements SET RequirementId='REQUIRES_PLAYER' WHERE RequirementSetId='CITY_HAS_LIGHTHOUSE_REQUIREMENTS';
+UPDATE RequirementSetRequirements SET RequirementId='REQUIRES_PLAYER' WHERE RequirementSetId='CITY_HAS_PETRA_REQUIREMENTS';
+UPDATE RequirementSetRequirements SET RequirementId='REQUIRES_PLAYER' WHERE RequirementSetId='CITY_HAS_RUHR_VALLEY_REQUIREMENTS';

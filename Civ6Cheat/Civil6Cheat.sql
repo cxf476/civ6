@@ -1,8 +1,10 @@
-UPDATE AiFavoredItems SET Value='0', Favored='0'  WHERE Item='PSEUDOYIELD_NUCLEAR_WEAPON';
-UPDATE AiFavoredItems SET Favored='0'  WHERE Item='TECH_NUCLEAR_FUSION';
-UPDATE AiFavoredItems SET Favored='0'  WHERE Item='PROJECT_LAUNCH_MARS_REACTOR';
-UPDATE AiFavoredItems SET Favored='0'  WHERE Item='PROJECT_LAUNCH_MARS_HABITATION';
-UPDATE AiFavoredItems SET Favored='0'  WHERE Item='PROJECT_LAUNCH_MARS_HYDROPONICS';
+UPDATE AiFavoredItems SET Value='-100', Favored='0'  WHERE Item='PSEUDOYIELD_NUCLEAR_WEAPON';
+UPDATE AiFavoredItems SET Value='-100', Favored='0'  WHERE Item='TECH_NUCLEAR_FUSION';
+UPDATE AiFavoredItems SET Value='-100', Favored='0'  WHERE Item='PROJECT_LAUNCH_MARS_REACTOR';
+UPDATE AiFavoredItems SET Value='-100', Favored='0'  WHERE Item='PROJECT_LAUNCH_MARS_HABITATION';
+UPDATE AiFavoredItems SET Value='-100', Favored='0'  WHERE Item='PROJECT_LAUNCH_MARS_HYDROPONICS';
+UPDATE AiFavoredItems SET Value='-100', Favored='0'  WHERE Item='PROJECT_LAUNCH_EARTH_SATELLITE';
+UPDATE AiFavoredItems SET Value='-100', Favored='0'  WHERE Item='PROJECT_LAUNCH_MOON_LANDING';
 
 INSERT INTO Types ('Type', 'Kind') VALUES ('TRAIT_HUMAN_PLAYER', 'KIND_TRAIT');
 INSERT INTO Types ('Type', 'Kind') VALUES ('BUILDING_HUMAN_PLAYER', 'KIND_BUILDING');
@@ -17,10 +19,10 @@ INSERT INTO Buildings ('BuildingType', 'TraitType', 'Name', 'Description', 'Purc
 
 
 UPDATE Units SET BaseMoves='3', Range='4' WHERE UnitType='UNIT_ROCKET_ARTILLERY';
-UPDATE Units SET BaseSightRange='3', AirSlots='5' WHERE UnitType='UNIT_AIRCRAFT_CARRIER';
+UPDATE Units SET BaseSightRange='3', AirSlots='7' WHERE UnitType='UNIT_AIRCRAFT_CARRIER';
 
--- UPDATE Units SET PrereqTech=NULL WHERE UnitType='UNIT_BOMBER';
--- UPDATE Units SET PrereqTech=NULL WHERE UnitType='UNIT_FIGHTER';
+UPDATE Units SET PrereqTech=NULL WHERE UnitType='UNIT_MEDIC';
+UPDATE Units SET PrereqTech=NULL WHERE UnitType='UNIT_OBSERVATION_BALLOON';
 
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_JET_FIGHTER', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_JET_BOMBER', 'BUILDING_HUMAN_PLAYER');
@@ -37,15 +39,17 @@ INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_SPY', 
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_BOMBER', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_MILITARY_ENGINEER', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_ARCHAEOLOGIST', 'BUILDING_HUMAN_PLAYER');
+INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_MEDIC', 'BUILDING_HUMAN_PLAYER');
+INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_OBSERVATION_BALLOON', 'BUILDING_HUMAN_PLAYER');
 
 -- UPDATE Buildings SET TraitType='TRAIT_HUMAN_PLAYER', RequiresPlacement='0' WHERE IsWonder='1';
 -- UPDATE Buildings SET ObsoleteEra='NO_ERA', MaxWorldInstances = '-1', MaxPlayerInstances = '1' WHERE IsWonder='1';
-UPDATE Buildings SET ObsoleteEra='NO_ERA', TraitType='TRAIT_HUMAN_PLAYER' WHERE IsWonder='1';
+UPDATE Buildings SET ObsoleteEra='NO_ERA' WHERE IsWonder='1';
 
 INSERT INTO Building_YieldChanges('BuildingType', 'YieldType', 'YieldChange') VALUES ('BUILDING_HUMAN_PLAYER', 'YIELD_PRODUCTION', '3');
-INSERT INTO Building_YieldChanges('BuildingType', 'YieldType', 'YieldChange') VALUES ('BUILDING_HUMAN_PLAYER', 'YIELD_FAITH', '50');
+INSERT INTO Building_YieldChanges('BuildingType', 'YieldType', 'YieldChange') VALUES ('BUILDING_HUMAN_PLAYER', 'YIELD_FAITH', '2');
 INSERT INTO Building_YieldChanges('BuildingType', 'YieldType', 'YieldChange') VALUES ('BUILDING_HUMAN_PLAYER', 'YIELD_CULTURE', '2');
-INSERT INTO Building_GreatPersonPoints('BuildingType', 'GreatPersonClassType', 'PointsPerTurn') VALUES ('BUILDING_HUMAN_PLAYER', 'GREAT_PERSON_CLASS_PROPHET', '20');
+INSERT INTO Building_GreatPersonPoints('BuildingType', 'GreatPersonClassType', 'PointsPerTurn') VALUES ('BUILDING_HUMAN_PLAYER', 'GREAT_PERSON_CLASS_PROPHET', '3');
 
 -- Gloabl Wonder Effects 
 UPDATE RequirementSetRequirements SET RequirementId='REQUIRES_PLAYER' WHERE RequirementSetId='CITY_HAS_CHICHEN_ITZA_REQUIREMENTS';
@@ -72,6 +76,20 @@ UPDATE Route_ValidBuildUnits SET UnitType='UNIT_BUILDER' WHERE RouteType='ROUTE_
 
 -- quick nukes
 -- UPDATE Projects SET Cost='1' WHERE ProjectType='PROJECT_MANHATTAN_PROJECT';
+
+-- WarmongerPercent adjust cheat
+-- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-2220', RazeWarmongerPercent='-3330' WHERE DiplomaticActionType='DIPLOACTION_JOINT_WAR';
+-- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-222', RazeWarmongerPercent='-333' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_FORMAL_WAR';
+-- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-222', RazeWarmongerPercent='-333' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_WAR_MINOR_CIV';
+-- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-222', RazeWarmongerPercent='-333' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_TERRITORIAL_WAR';
+-- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-222', RazeWarmongerPercent='-333' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_RECONQUEST_WAR';
+
+-- UPDATE GlobalParameters SET VALUE='222' WHERE NAME='WARMONGER_REDUCTION_IF_AT_WAR';
+-- UPDATE GlobalParameters SET VALUE='555' WHERE NAME='DIPLOMACY_WARMONGER_POINT_PERCENT_DECAY';
+-- UPDATE GlobalParameters SET VALUE='666' WHERE NAME='WARMONGER_REDUCTION_IF_DENOUNCED';
+-- UPDATE GlobalParameters SET VALUE='111' WHERE NAME='WARMONGER_FINAL_MAJOR_CITY_MULTIPLIER';
+-- UPDATE GlobalParameters SET VALUE='333' WHERE NAME='WARMONGER_CITY_PERCENT_OF_DOW';
+-- UPDATE GlobalParameters SET VALUE='444' WHERE NAME='WARMONGER_FINAL_MINOR_CITY_MULTIPLIER';
 
 -- faith enhancement for pantheon
 -- INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_SPARK', 'DIVINE_SPARK_HOLY_SITE');
@@ -107,58 +125,57 @@ INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_
 INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_SPARK', 'EARTH_GODDESS_APPEAL_FAITH');
 
 -- faith enhancement for founder 
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'CHURCH_PROPERTY_GOLD_CITY');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'LAY_MINISTRY_CULTURE_DISTRICTS');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'LAY_MINISTRY_FAITH_DISTRICTS');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'PILGRIMAGE_FAITH_FOREIGN_CITY');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'STEWARDSHIP_SCIENCE_DISTRICTS');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'STEWARDSHIP_GOLD_DISTRICTS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'CHURCH_PROPERTY_GOLD_CITY');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'LAY_MINISTRY_CULTURE_DISTRICTS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'LAY_MINISTRY_FAITH_DISTRICTS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'PILGRIMAGE_FAITH_FOREIGN_CITY');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'STEWARDSHIP_SCIENCE_DISTRICTS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'STEWARDSHIP_GOLD_DISTRICTS');
 INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'TITHE_GOLD_FOLLOWER');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'WORLD_CHURCH_CULTURE_FOREIGN_FOLLOWER');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'CROSS_CULTURAL_DIALOGUE_SCIENCE_FOREIGN_FOLLOWER');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'RELIGIOUS_UNITY_ENVOY_ON_ADOPTION');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'WORLD_CHURCH_CULTURE_FOREIGN_FOLLOWER');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'CROSS_CULTURAL_DIALOGUE_SCIENCE_FOREIGN_FOLLOWER');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'RELIGIOUS_UNITY_ENVOY_ON_ADOPTION');
 
 -- faith enhancement for enhancer
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'DEFENDER_OF_FAITH_COMBAT_BONUS');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'HOLY_ORDER_MISSIONARY_DISCOUNT');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'HOLY_ORDER_APOSTLE_DISCOUNT');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ITINERANT_PREACHERS_SPREAD_DISTANCE');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'JUST_WAR_COMBAT_BONUS');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'MISSIONARY_ZEAL_IGNORE_TERRAIN');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'MONASTIC_ISOLATION_REDUCE_COMBAT_LOSS');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'SCRIPTURE_SPEAD_STRENGTH');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'BURIAL_GROUNDS_CULTURE_BOMB_TRIGGER_HOLY_SITE');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'RELIGIOUS_COLONIZATION_AUTO_SPREAD');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'DEFENDER_OF_FAITH_COMBAT_BONUS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'HOLY_ORDER_MISSIONARY_DISCOUNT');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'HOLY_ORDER_APOSTLE_DISCOUNT');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ITINERANT_PREACHERS_SPREAD_DISTANCE');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'JUST_WAR_COMBAT_BONUS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'MISSIONARY_ZEAL_IGNORE_TERRAIN');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'MONASTIC_ISOLATION_REDUCE_COMBAT_LOSS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'SCRIPTURE_SPEAD_STRENGTH');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'BURIAL_GROUNDS_CULTURE_BOMB_TRIGGER_HOLY_SITE');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'RELIGIOUS_COLONIZATION_AUTO_SPREAD');
 
 -- faith enhancement for follower
--- INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'DIVINE_INSPIRATION_WONDER_FAITH');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'RELIGIOUS_COMMUNITY_SHRINE_HOUSING');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'RELIGIOUS_COMMUNITY_TEMPLE_HOUSING');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'RELIGIOUS_COMMUNITY_STAVE_HOUSING');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'FEED_THE_WORLD_SHRINE_FOOD');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'FEED_THE_WORLD_TEMPLE_FOOD');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'JESUIT_EDUCATION_SCIENCE_BUILDINGS');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'JESUIT_EDUCATION_CULTURE_BUILDINGS');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'RELIQUARIES_RELIC_FAITH');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'RELIQUARIES_RELIC_TOURISM');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'WORK_ETHIC_FOLLOWER_PRODUCTION');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ZEN_MEDITATION_AMENITY');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'CHORAL_MUSIC_SHRINE_CULTURE');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'CHORAL_MUSIC_TEMPLE_CULTURE');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_WARRIOR_MONKS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'DIVINE_INSPIRATION_WONDER_FAITH');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'RELIGIOUS_COMMUNITY_SHRINE_HOUSING');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'RELIGIOUS_COMMUNITY_TEMPLE_HOUSING');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'RELIGIOUS_COMMUNITY_STAVE_HOUSING');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'FEED_THE_WORLD_SHRINE_FOOD');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'FEED_THE_WORLD_TEMPLE_FOOD');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'JESUIT_EDUCATION_SCIENCE_BUILDINGS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'JESUIT_EDUCATION_CULTURE_BUILDINGS');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'RELIQUARIES_RELIC_FAITH');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'RELIQUARIES_RELIC_TOURISM');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'WORK_ETHIC_FOLLOWER_PRODUCTION');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ZEN_MEDITATION_AMENITY');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'CHORAL_MUSIC_SHRINE_CULTURE');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'CHORAL_MUSIC_TEMPLE_CULTURE');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_WARRIOR_MONKS');
 
 
 -- faith enhancement for worship
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_CATHEDRAL');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_GURDWARA');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_MEETING_HOUSE');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_MOSQUE');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_PAGODA');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_SYNAGOGUE');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_WAT');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_STUPA');
-INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_DIVINE_INSPIRATION', 'ALLOW_DAR_E_MEHR');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_CATHEDRAL');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_GURDWARA');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_MEETING_HOUSE');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_MOSQUE');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_PAGODA');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_SYNAGOGUE');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_WAT');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_STUPA');
+INSERT INTO BeliefModifiers ('BeliefType', 'ModifierId') VALUES ('BELIEF_TITHE', 'ALLOW_DAR_E_MEHR');
 
-
-
+-- UPDATE Beliefs SET BeliefClassType='BELIEF_CLASS_FOUNDER' WHERE BeliefType='BELIEF_ITINERANT_PREACHERS';
 

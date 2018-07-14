@@ -9,7 +9,7 @@ UPDATE AiFavoredItems SET Value='-100', Favored='0'  WHERE Item='PROJECT_LAUNCH_
 INSERT INTO Types ('Type', 'Kind') VALUES ('TRAIT_HUMAN_PLAYER', 'KIND_TRAIT');
 INSERT INTO Types ('Type', 'Kind') VALUES ('BUILDING_HUMAN_PLAYER', 'KIND_BUILDING');
 INSERT INTO Traits ('TraitType', 'Name', 'Description') VALUES ('TRAIT_HUMAN_PLAYER', 'AAA Trait', 'AAA Cheat trait for human player');
-INSERT INTO CivilizationTraits ('CivilizationType', 'TraitType') VALUES ('CIVILIZATION_ARABIA', 'TRAIT_HUMAN_PLAYER');
+INSERT INTO CivilizationTraits ('CivilizationType', 'TraitType') VALUES ('CIVILIZATION_RUSSIA', 'TRAIT_HUMAN_PLAYER');
 
 -- INSERT INTO TraitModifiers ('TraitType', 'ModifierId') VALUES ('TRAIT_HUMAN_PLAYER', 'TRAIT_BUILDER_WONDER_PERCENT');
 -- INSERT INTO TraitModifiers ('TraitType', 'ModifierId') VALUES ('TRAIT_HUMAN_PLAYER', 'TRAIT_ADJUST_BUILDER_CHARGES');
@@ -21,17 +21,29 @@ INSERT INTO Buildings ('BuildingType', 'TraitType', 'Name', 'Description', 'Purc
 UPDATE Units SET BaseMoves='3', Range='4' WHERE UnitType='UNIT_ROCKET_ARTILLERY';
 UPDATE Units SET BaseSightRange='3', AirSlots='7' WHERE UnitType='UNIT_AIRCRAFT_CARRIER';
 
-UPDATE Units SET PrereqTech=NULL WHERE UnitType='UNIT_MEDIC';
-UPDATE Units SET PrereqTech=NULL WHERE UnitType='UNIT_OBSERVATION_BALLOON';
+UPDATE Units SET PrereqTech=NULL, BaseMoves='4' WHERE UnitType='UNIT_MEDIC';
+UPDATE Units SET PrereqTech=NULL, BaseMoves='5', BaseSightRange='4' WHERE UnitType='UNIT_OBSERVATION_BALLOON';
+-- DELETE FROM  TypeTags WHERE Type='UNIT_ARCHER';
+-- INSERT INTO TypeTags ('Tag', 'Type') VALUES ('CLASS_FORWARD_OBSERVER', 'UNIT_ARCHER');
+-- INSERT INTO TypeTags ('Tag', 'Type') VALUES ('CLASS_SIEGE', 'UNIT_ARCHER');
+-- INSERT INTO TypeTags ('Tag', 'Type') VALUES ('CLASS_SIEGE_SETUP', 'UNIT_ARCHER'); 
+-- DELETE FROM  TypeTags WHERE Type='UNIT_SLINGER';
+-- INSERT INTO TypeTags ('Tag', 'Type') VALUES ('CLASS_FORWARD_OBSERVER', 'UNIT_SLINGER');
+-- INSERT INTO TypeTags ('Tag', 'Type') VALUES ('CLASS_SIEGE', 'UNIT_SLINGER');
+-- INSERT INTO TypeTags ('Tag', 'Type') VALUES ('CLASS_SIEGE_SETUP', 'UNIT_SLINGER');
+
 
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_JET_FIGHTER', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_JET_BOMBER', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_ANTIAIR_GUN', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_MOBILE_SAM', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_MODERN_AT', 'BUILDING_HUMAN_PLAYER');
+INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_HELICOPTER', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_ROCKET_ARTILLERY', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_MECHANIZED_INFANTRY', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_MODERN_ARMOR', 'BUILDING_HUMAN_PLAYER');
+INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_SUBMARINE', 'BUILDING_HUMAN_PLAYER');
+INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_DESTROYER', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_NUCLEAR_SUBMARINE', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_AIRCRAFT_CARRIER', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_MISSILE_CRUISER', 'BUILDING_HUMAN_PLAYER');
@@ -42,14 +54,32 @@ INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_ARCHAE
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_MEDIC', 'BUILDING_HUMAN_PLAYER');
 INSERT INTO Unit_BuildingPrereqs ('UNIT', 'PrereqBuilding') VALUES ('UNIT_OBSERVATION_BALLOON', 'BUILDING_HUMAN_PLAYER');
 
+DELETE FROM UnitUpgrades WHERE UpgradeUnit='UNIT_JET_FIGHTER';
+DELETE FROM UnitUpgrades WHERE UpgradeUnit='UNIT_ROCKET_ARTILLERY';
+DELETE FROM UnitUpgrades WHERE UpgradeUnit='UNIT_MECHANIZED_INFANTRY';
+DELETE FROM UnitUpgrades WHERE UpgradeUnit='UNIT_MODERN_ARMOR';
+DELETE FROM UnitUpgrades WHERE UpgradeUnit='UNIT_MODERN_AT';
+DELETE FROM UnitUpgrades WHERE UpgradeUnit='UNIT_HELICOPTER';
+DELETE FROM UnitUpgrades WHERE UpgradeUnit='UNIT_DESTROYER';
+DELETE FROM UnitUpgrades WHERE UpgradeUnit='UNIT_MISSILE_CRUISER';
+
+-- UPDATE Units SET TraitType='TRAIT_HUMAN_PLAYER' WHERE UnitType='UNIT_JET_FIGHTER';
+-- UPDATE Units SET TraitType='TRAIT_HUMAN_PLAYER' WHERE UnitType='UNIT_ROCKET_ARTILLERY';
+-- UPDATE Units SET TraitType='TRAIT_HUMAN_PLAYER' WHERE UnitType='UNIT_MECHANIZED_INFANTRY';
+-- UPDATE Units SET TraitType='TRAIT_HUMAN_PLAYER' WHERE UnitType='UNIT_MODERN_ARMOR';
+-- UPDATE Units SET TraitType='TRAIT_HUMAN_PLAYER' WHERE UnitType='UNIT_MODERN_AT';
+-- UPDATE Units SET TraitType='TRAIT_HUMAN_PLAYER' WHERE UnitType='UNIT_HELICOPTER';
+-- UPDATE Units SET TraitType='TRAIT_HUMAN_PLAYER' WHERE UnitType='UNIT_DESTROYER';
+-- UPDATE Units SET TraitType='TRAIT_HUMAN_PLAYER' WHERE UnitType='UNIT_MISSILE_CRUISER';
+
 -- UPDATE Buildings SET TraitType='TRAIT_HUMAN_PLAYER', RequiresPlacement='0' WHERE IsWonder='1';
 -- UPDATE Buildings SET ObsoleteEra='NO_ERA', MaxWorldInstances = '-1', MaxPlayerInstances = '1' WHERE IsWonder='1';
-UPDATE Buildings SET ObsoleteEra='NO_ERA' WHERE IsWonder='1';
+UPDATE Buildings SET ObsoleteEra='NO_ERA', Cost='10' WHERE IsWonder='1';
 
 INSERT INTO Building_YieldChanges('BuildingType', 'YieldType', 'YieldChange') VALUES ('BUILDING_HUMAN_PLAYER', 'YIELD_PRODUCTION', '3');
 INSERT INTO Building_YieldChanges('BuildingType', 'YieldType', 'YieldChange') VALUES ('BUILDING_HUMAN_PLAYER', 'YIELD_FAITH', '2');
 INSERT INTO Building_YieldChanges('BuildingType', 'YieldType', 'YieldChange') VALUES ('BUILDING_HUMAN_PLAYER', 'YIELD_CULTURE', '2');
-INSERT INTO Building_GreatPersonPoints('BuildingType', 'GreatPersonClassType', 'PointsPerTurn') VALUES ('BUILDING_HUMAN_PLAYER', 'GREAT_PERSON_CLASS_PROPHET', '3');
+INSERT INTO Building_GreatPersonPoints('BuildingType', 'GreatPersonClassType', 'PointsPerTurn') VALUES ('BUILDING_HUMAN_PLAYER', 'GREAT_PERSON_CLASS_PROPHET', '2');
 
 -- Gloabl Wonder Effects 
 UPDATE RequirementSetRequirements SET RequirementId='REQUIRES_PLAYER' WHERE RequirementSetId='CITY_HAS_CHICHEN_ITZA_REQUIREMENTS';
@@ -78,14 +108,14 @@ UPDATE Route_ValidBuildUnits SET UnitType='UNIT_BUILDER' WHERE RouteType='ROUTE_
 -- UPDATE Projects SET Cost='1' WHERE ProjectType='PROJECT_MANHATTAN_PROJECT';
 
 -- WarmongerPercent adjust cheat
--- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-2220', RazeWarmongerPercent='-3330' WHERE DiplomaticActionType='DIPLOACTION_JOINT_WAR';
--- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-222', RazeWarmongerPercent='-333' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_FORMAL_WAR';
--- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-222', RazeWarmongerPercent='-333' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_WAR_MINOR_CIV';
+-- UPDATE DiplomaticActions SET CaptureWarmongerPercent='-2000' WHERE DiplomaticActionType='DIPLOACTION_JOINT_WAR';
+UPDATE DiplomaticActions SET CaptureWarmongerPercent='0' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_PROTECTORATE_WAR';
+-- UPDATE DiplomaticActions SET WarmongerPercent="0", CaptureWarmongerPercent='-100000', RazeWarmongerPercent='0' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_FORMAL_WAR';
 -- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-222', RazeWarmongerPercent='-333' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_TERRITORIAL_WAR';
 -- UPDATE DiplomaticActions SET WarmongerPercent="-10000", CaptureWarmongerPercent='-222', RazeWarmongerPercent='-333' WHERE DiplomaticActionType='DIPLOACTION_DECLARE_RECONQUEST_WAR';
 
 -- UPDATE GlobalParameters SET VALUE='222' WHERE NAME='WARMONGER_REDUCTION_IF_AT_WAR';
--- UPDATE GlobalParameters SET VALUE='555' WHERE NAME='DIPLOMACY_WARMONGER_POINT_PERCENT_DECAY';
+-- UPDATE GlobalParameters SET VALUE='500' WHERE NAME='DIPLOMACY_WARMONGER_POINT_PERCENT_DECAY';
 -- UPDATE GlobalParameters SET VALUE='666' WHERE NAME='WARMONGER_REDUCTION_IF_DENOUNCED';
 -- UPDATE GlobalParameters SET VALUE='111' WHERE NAME='WARMONGER_FINAL_MAJOR_CITY_MULTIPLIER';
 -- UPDATE GlobalParameters SET VALUE='333' WHERE NAME='WARMONGER_CITY_PERCENT_OF_DOW';
